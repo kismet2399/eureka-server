@@ -5,16 +5,17 @@
  * You shall not disclose such Confidential Information and shall use it only
  * in accordance with the terms of the license agreement you entered into with GuaHao.com.
  */
-package com.kismet.cloud.productserver.controller;
+package com.kismet.cloud.productserver.fegin;
 
 import com.google.common.collect.ImmutableList;
 import com.kismet.cloud.productapi.domain.Product;
+import com.kismet.cloud.productapi.ProductFeignApi;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -23,17 +24,22 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-01-11 16:44
  */
 @RestController
-public class ProductCtr {
+public class ProductFeignClient implements ProductFeignApi {
 
-    @RequestMapping("find/{id}")
+    @Value("${server.port}")
+    private String port;
+
+    @Override
     public Product find(@PathVariable("id") Long id) {
+        System.out.println("查询订单服务");
+        int a = 1 / 0;
         System.out.println(id);
-        return new Product().setId(1L).setName("苹果").setPrice(BigDecimal.TEN).setStock(3);
+        return new Product().setId(1L).setName("苹果").setPrice(BigDecimal.TEN).setStock(3).setPort(port);
     }
 
-    @RequestMapping("list")
+    @Override
     public List<Product> list() {
-        System.exit(0);
-        return ImmutableList.of(new Product().setId(1L).setName("苹果").setPrice(BigDecimal.TEN).setStock(3));
+        return ImmutableList
+            .of(new Product().setId(1L).setName("苹果").setPrice(BigDecimal.TEN).setStock(3).setPort(port));
     }
 }

@@ -8,6 +8,6 @@ eureka:
     registerWithEureka: false # 是否需要注册到Eureka
     fetchRegistry: false # 是否需要拉取注册信息
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ # eureka服务地址
   server:
     enable-self-preservation: false

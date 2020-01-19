@@ -3,9 +3,50 @@ server:
 
 spring:
   application:
-    name: order-server
+    name: order-server # 服务名
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/ # eureka服务地址
+
+PRODUCT-SERVER:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule # 负载均衡策略
+    MaxAutoRetries: 0 # 同一台实例最大重试次数,不包括首次调用
+    MaxAutoRetriesNextServer: 0 # 重试负载均衡其他的实例最大重试次数,不包括首次server
+
+#ribbon:
+#  http:
+#    client:
+#      enabled: true
+#  restclient:
+#    enabled: true
+#  # 同一台实例最大重试次数,不包括首次调用
+#  MaxAutoRetries: 1
+#  # 重试负载均衡其他的实例最大重试次数,不包括首次server
+#  MaxAutoRetriesNextServer: 2
+#  OkToRetryOnAllOperations: true
+
+feign:
+  hystrix:
+    enabled: true # 开启feign服务降级
+  client:
+    config:
+      default:
+        connectTimeout: 1000 # 链接超时时间
+        readTimeout: 1000 # 读取超时时间
+
+#hystrix的超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 9000
+
+
+

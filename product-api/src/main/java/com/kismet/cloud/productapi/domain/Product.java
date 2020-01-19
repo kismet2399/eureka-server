@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  *
@@ -21,6 +22,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@ToString
 public class Product implements Serializable {
 
     private Long id;//商品id
@@ -30,5 +32,7 @@ public class Product implements Serializable {
     private BigDecimal price;//商品价格
 
     private int stock;//商品库存
+
+    private String port;//商品库存
 
 }

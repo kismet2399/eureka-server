@@ -9,6 +9,8 @@ package com.kismet.cloud.orderserver.controller;
 
 import com.kismet.cloud.orderserver.domain.OrderInfo;
 import com.kismet.cloud.orderserver.service.OrderInfoService;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.ribbon.proxy.annotation.Hystrix;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +28,15 @@ public class OrderCtr {
     private OrderInfoService orderInfoService;
 
     @RequestMapping(value = "save", produces = { "application/json;charset=UTF-8" })
+    @HystrixCommand(fallbackMethod = "saveForBack")
     public OrderInfo save(Long userId, Long productId) {
+        System.out.println("保存订单操作");
+        int a = 1 / 0;
+        return orderInfoService.save(userId, productId);
+    }
+
+    public OrderInfo saveForBack(Long userId, Long productId) {
+        System.out.println("保存订单降级操作");
         return orderInfoService.save(userId, productId);
     }
 }

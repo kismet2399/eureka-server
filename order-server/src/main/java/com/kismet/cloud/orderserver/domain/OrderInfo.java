@@ -34,4 +34,6 @@ public class OrderInfo implements Serializable {
 
     private Long userId;
 
+    private String port;
+
 }
