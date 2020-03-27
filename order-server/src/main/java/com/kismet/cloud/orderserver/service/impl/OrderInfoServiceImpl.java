@@ -17,6 +17,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author kismet
@@ -25,15 +26,16 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OrderInfoServiceImpl implements OrderInfoService {
-    //    @Autowired
-    //    private RestTemplate restTemplate;
+    @Autowired
+    private RestTemplate restTemplate;
     @Autowired
     private ProductFeignApi productFeignApi;
+
     @Override
-    public OrderInfo save(Long userId, Long productId)  {
+    public OrderInfo save(Long userId, Long productId) {
         // 根据productId获取product对象
-//        Product p = restTemplate.getForObject("http://PRODUCT-SERVER/find/" + productId, Product.class);
-        Product p = productFeignApi.find(productId);
+        Product p = restTemplate.getForObject("http://PRODUCT-SERVER/find/" + productId, Product.class);
+        //        Product p = productFeignApi.find(productId);
         OrderInfo info = new OrderInfo();
         assert p != null;
         info.setUserId(userId).setOrderNo(UUID.randomUUID().toString()).setCreateTime(new Date())

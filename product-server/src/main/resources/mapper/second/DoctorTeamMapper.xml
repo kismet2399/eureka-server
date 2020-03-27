@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kismet.cloud.productserver.manager.model.second.mapper.DoctorTeamMapper">
+    <insert id="insert"  parameterType="com.kismet.cloud.productserver.manager.model.second.entity.DoctorTeamEntity">
+        insert into OE_JTYS_TEAM (JTYS_TEAM_ID, ORGANIZATION_ID, FAMILY_DOCTOR_ID, PROVICE_DISTRICT_CODE,
+                                  ORGANIZATION_CODE, TEAM_NAME, PRESIDE_NAME, PRESIDEID_CARD_TYPE, PRESIDEID_CARD_NO,
+                                  UPLOAD_DATE, UPDATE_DATE, CREATE_TIME, LAST_UPDATE_DTIME)
+        values (#{jtysTeamId,jdbcType=VARCHAR},
+                #{organizationId,jdbcType=VARCHAR},
+                #{familyDoctorId,jdbcType=VARCHAR},
+                #{proviceDistrictCode,jdbcType=VARCHAR},
+                #{organizationCode,jdbcType=VARCHAR},
+                #{teamName,jdbcType=VARCHAR},
+                #{presideName,jdbcType=VARCHAR},
+                #{presideidCardType,jdbcType=VARCHAR},
+                #{presideidCardNo,jdbcType=VARCHAR},
+                #{uploadDate,jdbcType=TIMESTAMP},
+                #{updateDate,jdbcType=TIMESTAMP},
+                #{createTime,jdbcType=TIMESTAMP},
+                #{lastUpdateDtime,jdbcType=TIMESTAMP})
+    </insert>
+    <select id="selectByPrimaryKey"
+            resultType="java.lang.Integer"
+            parameterType="java.lang.String">
+        select count(*)
+        from OE_JTYS_TEAM
+        where JTYS_TEAM_ID = #{teamId}
+    </select>
+    <update id="update">
+        update OE_JTYS_TEAM
+        set ORGANIZATION_ID       = #{organizationId,jdbcType=VARCHAR},
+            FAMILY_DOCTOR_ID      = #{familyDoctorId,jdbcType=VARCHAR},
+            PROVICE_DISTRICT_CODE = #{proviceDistrictCode,jdbcType=VARCHAR},
+            ORGANIZATION_CODE     = #{organizationCode,jdbcType=VARCHAR},
+            TEAM_NAME             = #{teamName,jdbcType=VARCHAR},
+            PRESIDE_NAME          = #{presideName,jdbcType=VARCHAR},
+            PRESIDEID_CARD_TYPE   = #{presideidCardType,jdbcType=VARCHAR},
+            PRESIDEID_CARD_NO     = #{presideidCardNo,jdbcType=VARCHAR},
+            UPLOAD_DATE           = #{uploadDate,jdbcType=TIMESTAMP},
+            UPDATE_DATE           = #{updateDate,jdbcType=TIMESTAMP},
+            LAST_UPDATE_DTIME     = #{lastUpdateDtime,jdbcType=TIMESTAMP}
+        where JTYS_TEAM_ID = #{jtysTeamId}
+    </update>
+</mapper>
