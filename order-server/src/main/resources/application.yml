@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: order-server # 服务名
+  redis:
+    host: 47.104.249.62 # Redis服务器连接端口
+    port: 6379
+    timeout: 30000
+    password:
 
 eureka:
   client:
@@ -34,8 +39,8 @@ feign:
   client:
     config:
       default:
-        connectTimeout: 1000 # 链接超时时间
-        readTimeout: 1000 # 读取超时时间
+        connectTimeout: 1000 # 链接超时时间(服务降级超时时间即orderService访问其他服务)
+        readTimeout: 1000 # 读取超时时间(服务降级超时时间即orderService访问其他服务)
 
 #hystrix的超时时间
 hystrix:
@@ -43,10 +48,13 @@ hystrix:
     default:
       execution:
         timeout:
-          enabled: true
+          enabled: true #hystrix的默认超时时间是1秒钟
         isolation:
           thread:
-            timeoutInMilliseconds: 9000
+            timeoutInMilliseconds: 3000 # (熔断降级超时时间即客户端访问orderService)
 
-
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

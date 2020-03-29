@@ -17,7 +17,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @Configuration
-@MapperScan(basePackages = { "com.kismet.cloud.productserver.manager.model.primary.mapper" },
+@MapperScan(basePackages = { "com.kismet.cloud.productserver.manager.model.primary.mapper" },//对应mapper文件所在包
     sqlSessionTemplateRef = "primarySqlSessionTemplate")
 public class PrimaryDBConfig {
     @Value("${spring.datasource.primary.driver-class-name}")
@@ -48,7 +48,7 @@ public class PrimaryDBConfig {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         bean.setMapperLocations(
-            //扫描指定目录的xml
+            //扫描指定目录的Mapper的xml
             new PathMatchingResourcePatternResolver().getResources("classpath:mapper/primary/*Mapper.xml"));
         return bean.getObject();
     }

@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ * ProductFeignApi降级
+ *
  * @author kismet
  * @since 2020/1/18
  */

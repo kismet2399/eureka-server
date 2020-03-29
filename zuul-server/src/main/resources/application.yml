@@ -1,0 +1,22 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: zuul-server # 服务名
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/ # eureka服务地址
+
+zuul: # 默认是 端口/服务名/服务路径---替代--->服务端口/服务路径
+  ignoredPatterns: /*-server/** # 屏蔽路径
+  sensitiveHeaders:  # 去掉cookie请求头被拦截的问题
+  routes:
+    order-server-route:
+      path: /order/** # 替换服务名的路径
+      serviceId: order-server # 服务名
+    product-server-route:
+      path: /product/** # 替换服务名的路径
+      serviceId: product-server # 服务名
