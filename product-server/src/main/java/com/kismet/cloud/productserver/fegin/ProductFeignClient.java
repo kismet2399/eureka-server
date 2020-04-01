@@ -21,12 +21,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author kismet
  * @version V1.0
  * @since 2020-01-11 16:44
  */
 @RestController
+@Slf4j
 public class ProductFeignClient implements ProductFeignApi {
 
     @Value("${server.port}")
@@ -38,15 +41,15 @@ public class ProductFeignClient implements ProductFeignApi {
 
     @Override
     public Product find(@PathVariable("id") Long id) {
-        System.out.println("查询订单服务");
-        System.out.println(id);
+        log.info("查询订单服务");
+        log.info(id + "");
         return new Product().setId(1L).setName("苹果").setPrice(BigDecimal.TEN).setStock(3).setPort(port);
     }
 
     @Override
     public List<Product> list() {
-        System.out.println(doctorTeamMapper.selectByPrimaryKey("111"));
-        System.out.println(cyOffsetStoreMapper.selectByPrimaryKey(11L));
+        log.info(doctorTeamMapper.selectByPrimaryKey("111") + "");
+        log.info(cyOffsetStoreMapper.selectByPrimaryKey(11L) + "");
         return ImmutableList
             .of(new Product().setId(1L).setName("苹果").setPrice(BigDecimal.TEN).setStock(3).setPort(port));
     }

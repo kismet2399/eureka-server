@@ -16,12 +16,15 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author kismet
  * @version V1.0
  * @since 2020-01-11 17:01
  */
 @RestController
+@Slf4j
 public class OrderCtr {
     @Autowired
     private OrderInfoService orderInfoService;
@@ -31,7 +34,7 @@ public class OrderCtr {
     @RequestMapping(value = "save", produces = { "application/json;charset=UTF-8" })
     @HystrixCommand(fallbackMethod = "saveForBack")
     public OrderInfo save(Long userId, Long productId) {
-        System.out.println("保存订单操作");
+        log.info("保存订单操作");
         if ((userId&1L)== 0) {
             int a = 1 / 0;
         }
@@ -45,7 +48,7 @@ public class OrderCtr {
      * @return
      */
     public OrderInfo saveForBack(Long userId, Long productId) {
-        System.out.println("保存订单降级操作");
+        log.info("保存订单降级操作");
         stringRedisTemplate.opsForValue().set("333","3334");
         return orderInfoService.save(userId, productId);
     }

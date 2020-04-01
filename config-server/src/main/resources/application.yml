@@ -1,0 +1,17 @@
+server:
+  port: 9100
+
+spring:
+  application:
+    name: config-server # 服务名
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/kismet2399/cloud-config
+          username: kismet2399
+          password: GITHUBworkhard0829
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/ # eureka服务地址
