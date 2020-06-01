@@ -13,4 +13,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 
 
-
+# 个性化配置
+server:
+  port: 8082
+  host: 192.168.1.1

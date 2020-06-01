@@ -7,8 +7,13 @@ spring:
         service-id: config-server
         enabled: true
       label: master
+      # name:  #文件名,默认未服务名.后缀
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/ # eureka服务地址
+
+server:
+  port: 8083
+  host: 192.168.1.1
 

@@ -34,8 +34,8 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     @Override
     public OrderInfo save(Long userId, Long productId) {
         // 根据productId获取product对象
-        Product p = restTemplate.getForObject("http://PRODUCT-SERVER/find/" + productId, Product.class);
-        //        Product p = productFeignApi.find(productId);
+        //        Product p = restTemplate.getForObject("http://PRODUCT-SERVER/find/" + productId, Product.class);
+        Product p = productFeignApi.find(productId);
         OrderInfo info = new OrderInfo();
         assert p != null;
         info.setUserId(userId).setOrderNo(UUID.randomUUID().toString()).setCreateTime(new Date())
