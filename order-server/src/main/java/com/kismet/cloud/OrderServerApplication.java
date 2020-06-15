@@ -22,11 +22,14 @@ import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
+import tk.mybatis.spring.annotation.MapperScan;
+
 @SpringBootApplication
 @EnableFeignClients
 @EnableRetry
 @EnableCircuitBreaker
 @EnableHystrixDashboard
+@MapperScan("com.kismet.cloud.orderserver.mapper")
 public class OrderServerApplication {
 
     public static void main(String[] args) {

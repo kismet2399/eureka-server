@@ -1,4 +1,4 @@
-package com.kismet.cloud.configserver.test.idGen;
+package com.kismet.cloud.configserver.study.zookeeperLock.idGen;
 
 import java.util.HashSet;
 import java.util.Set;

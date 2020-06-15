@@ -7,7 +7,7 @@
  */
 package com.kismet.cloud.orderserver.service;
 
-import com.kismet.cloud.orderserver.domain.OrderInfo;
+import com.kismet.cloud.orderserver.model.OrderDO;
 
 /**
  *
@@ -23,5 +23,5 @@ public interface OrderInfoService {
      * @param productId
      * @return
      */
-    OrderInfo save(Long userId, Long productId);
+    OrderDO save(Long userId, Long productId);
 }

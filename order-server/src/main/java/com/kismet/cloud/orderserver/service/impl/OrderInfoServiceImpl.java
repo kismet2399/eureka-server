@@ -7,7 +7,7 @@
  */
 package com.kismet.cloud.orderserver.service.impl;
 
-import com.kismet.cloud.orderserver.domain.OrderInfo;
+import com.kismet.cloud.orderserver.model.OrderDO;
 import com.kismet.cloud.orderserver.service.OrderInfoService;
 import com.kismet.cloud.productapi.ProductFeignApi;
 import com.kismet.cloud.productapi.domain.Product;
@@ -32,11 +32,11 @@ public class OrderInfoServiceImpl implements OrderInfoService {
     private ProductFeignApi productFeignApi;
 
     @Override
-    public OrderInfo save(Long userId, Long productId) {
+    public OrderDO save(Long userId, Long productId) {
         // 根据productId获取product对象
         //        Product p = restTemplate.getForObject("http://PRODUCT-SERVER/find/" + productId, Product.class);
         Product p = productFeignApi.find(productId);
-        OrderInfo info = new OrderInfo();
+        OrderDO info = new OrderDO();
         assert p != null;
         info.setUserId(userId).setOrderNo(UUID.randomUUID().toString()).setCreateTime(new Date())
             .setProductPrice(p.getPrice()).setProductName(p.getName()).setPort(p.getPort());

@@ -5,7 +5,7 @@
  * You shall not disclose such Confidential Information and shall use it only
  * in accordance with the terms of the license agreement you entered into with GuaHao.com.
  */
-package com.kismet.cloud.orderserver.domain;
+package com.kismet.cloud.orderserver.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -22,7 +22,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class OrderInfo implements Serializable {
+public class OrderDO implements Serializable {
 
     private String orderNo;
 
